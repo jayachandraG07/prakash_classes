@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #fff;
+  font-family: "Inter", "Noto Sans Telugu", sans-serif;
+}
+
+.font-display,
+h1,
+h2,
+h3 {
+  font-family: "Plus Jakarta Sans", "Noto Sans Telugu", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  overflow-x: clip;
+}
+
+.hero-grid {
+  background-image: linear-gradient(#ca8a0414 1px, transparent 0),
+    linear-gradient(90deg, #ca8a0414 1px, transparent 0);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
+  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
+}
+
+@keyframes mathFloat {
+  0% {
+    transform: translateY(18px) rotate(-10deg);
+  }
+  100% {
+    transform: translateY(-22px) rotate(12deg);
+  }
+}
+
+.math-float {
+  animation: mathFloat var(--dur, 16s) ease-in-out var(--delay, 0s) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes typingDot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+.typing-dot {
+  animation: typingDot 1s ease-in-out infinite;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes shimmerMove {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer-border {
+  isolation: isolate;
+  position: relative;
+}
+
+.shimmer-border::before {
+  animation: shimmerMove 3.5s linear infinite;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    #f59e0b 42%,
+    #fde68a 50%,
+    #f59e0b 58%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  border-radius: inherit;
+  content: "";
+  inset: -1px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1.5px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 10px));
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-up,
+  .math-float,
+  .typing-dot {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .shimmer-border::before {
+    animation: none;
+    background-position: 50% 0;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-mask {
+    overflow-x: auto;
+  }
+}
